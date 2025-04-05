@@ -17,7 +17,7 @@
 
 ## <a name="introduction">🤖 Introduction</a>
 
-Built with React.js for handling the user interface, Three.js for rendering 3D elements, and styled with TailwindCSS, the 3D Minimalistic portfolio is a website project. The primary goal is to demonstrate the developer's skills in a unique manner that creates a lasting impact.
+This is a 3D interactive portfolio built using Three.js, designed to showcase my projects and skills in a visually immersive way. With smooth camera transitions, responsive design, and creative animations, this portfolio is a blend of tech and aesthetics. It’s built with Vite for blazing-fast development and deployed on Vercel for easy access anywhere.
 
 ## <a name="tech-stack">⚙️ Tech Stack</a>
 
@@ -29,6 +29,8 @@ Built with React.js for handling the user interface, Three.js for rendering 3D e
 - Email JS
 - Vite
 - Tailwind CSS
+- Ready Player Me
+- Mixamo
 
 ## <a name="features">🔋 Features</a>
 
