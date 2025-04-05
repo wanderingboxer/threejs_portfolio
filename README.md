@@ -40,9 +40,7 @@ Built with React.js for handling the user interface, Three.js for rendering 3D e
 
 👉 **Engaging Experience Timeline**: Hover over career milestones to trigger interactive 3D animations that bring your professional journey to life.
 
-👉 **Client Testimonials**: A dedicated section highlighting satisfied clients and their feedback.
-
-👉 **Easy Contact Form**: A user-friendly email form for visitors to reach out directly from your portfolio.
+👉 **Easy Contact Form**: A user-friendly email form for visitors to reach out directly from the portfolio.
 
 👉 **Clean Footer**: A minimalist design featuring social media links for easy networking.
 
