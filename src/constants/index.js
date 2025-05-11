@@ -136,11 +136,11 @@ export const myProjects = [
     ],
   },
   {
-    title: 'Xora - A modern SaaS Landing Page',
-    desc: 'Xora is a modern SaaS landing page template that is designed to help software companies showcase their products and services in a professional and engaging way. It features a clean and minimalistic design that is easy to customize and adapt to your needs.',
+    title: 'AI-Nexus - AI-Powered Chat Application',
+    desc: 'A sophisticated AI chat application built with Next.js, featuring real-time conversations, advanced prompt caching, and intelligent tool orchestration powered by LangChain and Claude 3.5 Sonnet.',
     subdesc:
-      'Built with React.js, TailwindCSS, and JavaScript, Xora combines cutting-edge technology with a user-centric approach to create a landing page that will help you attract and convert more customers.',
-    href: 'https://xora-vert.vercel.app/',
+      'Built with Next.js, LangChain, Claude, and TypeScript, AI-Nexus provides a seamless and intuitive chat experience with advanced AI capabilities.',
+    href: 'https://ai-nexus-gold.vercel.app/',
     texture: '/textures/project/project4.mp4',
     logo: '/assets/project-logo4.png',
     logoStyle: {
@@ -152,18 +152,18 @@ export const myProjects = [
     tags: [
       {
         id: 1,
-        name: 'React.js',
-        path: '/assets/react.svg',
+        name: 'LangChain',
+        path: '/assets/langchain.jpeg',
       },
       {
         id: 2,
-        name: 'TailwindCSS',
-        path: 'assets/tailwindcss.png',
+        name: 'Claude',
+        path: 'assets/claude.png',
       },
       {
         id: 3,
-        name: 'JavaScript',
-        path: '/assets/JavaScript.png',
+        name: 'TypeScript',
+        path: '/assets/typescript.png',
       },
       {
         id: 4,
