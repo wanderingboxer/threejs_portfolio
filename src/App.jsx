@@ -9,6 +9,10 @@ import Projects from './sections/Projects.jsx';
 import WorkExperience from './sections/Experience.jsx';
 import CustomCursor from './components/CustomCursor.jsx';
 import BootScreen from './components/BootScreen.jsx';
+import GlobalScene from './components/GlobalScene.jsx';
+import AIAgent from './components/AIAgent.jsx';
+import LevelMeter from './components/LevelMeter.jsx';
+import Konami from './components/Konami.jsx';
 
 const App = () => {
   const [booted, setBooted] = useState(false);
@@ -20,6 +24,12 @@ const App = () => {
       <div className="vignette" />
       <div className="crt-overlay" />
 
+      {/* Persistent 3D scene behind all sections */}
+      <GlobalScene />
+
+      <LevelMeter />
+      <Konami />
+
       <main className="relative">
         <Navbar />
         <Hero />
@@ -29,6 +39,8 @@ const App = () => {
         <Contact />
         <Footer />
       </main>
+
+      <AIAgent />
     </>
   );
 };

@@ -4,17 +4,22 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { useGSAP } from '@gsap/react';
 
 import HoloGlobe from '../components/HoloGlobe.jsx';
-import HudFrame from '../components/HudFrame.jsx';
 import SkillBar from '../components/SkillBar.jsx';
 import { profile, skills, achievements, education } from '../constants/index.js';
 
 gsap.registerPlugin(ScrollTrigger);
 
-const tierStyles = {
-  GOLD: 'border-neon-amber/60 text-neon-amber',
-  SILVER: 'border-hud-text/40 text-hud-text',
-  BRONZE: 'border-neon-magenta/40 text-neon-magenta',
-};
+const SectionHeading = ({ eyebrow, prefix, accent }) => (
+  <div className="flex items-end justify-between gap-6 mb-10">
+    <div>
+      <div className="hud-eyebrow text-neon-cyan/80">{eyebrow}</div>
+      <h2 className="display-text mt-3 text-4xl sm:text-6xl">
+        <span className="text-hud-text">{prefix}</span>{' '}
+        <span className="text-holo">{accent}</span>
+      </h2>
+    </div>
+  </div>
+);
 
 const About = () => {
   const [hasCopied, setHasCopied] = useState(false);
@@ -29,108 +34,102 @@ const About = () => {
   useGSAP(() => {
     gsap.utils.toArray('.about-card').forEach((el, i) => {
       gsap.from(el, {
-        y: 40,
+        y: 50,
         opacity: 0,
         duration: 0.8,
         delay: i * 0.05,
         ease: 'power3.out',
-        scrollTrigger: {
-          trigger: el,
-          start: 'top 85%',
-        },
+        scrollTrigger: { trigger: el, start: 'top 88%' },
       });
     });
   }, { scope: sectionRef });
 
   return (
-    <section ref={sectionRef} id="profile" className="section-wrap">
-      <div className="container-x c-space">
-        {/* Heading */}
-        <div className="flex items-end justify-between gap-6 mb-10">
-          <div>
-            <div className="hud-eyebrow text-neon-cyan/80">// SECTOR 02 — PILOT PROFILE</div>
-            <h2 className="display-text mt-3 text-4xl sm:text-6xl">
-              <span className="text-hud-text">PILOT</span>{' '}
-              <span className="text-gradient-cyber">DOSSIER</span>
-            </h2>
-          </div>
-          <div className="hidden sm:flex items-center gap-2 font-mono text-[11px] text-hud-dim">
-            <span className="blink-dot-cyan" /> AUTH OK
-          </div>
-        </div>
+    <section ref={sectionRef} id="profile" className="section-wrap relative">
+      <div className="aurora" />
+      <div className="container-x c-space relative">
+        <SectionHeading eyebrow="// LEVEL 02 — CHARACTER STATS" prefix="THE" accent="CHARACTER CARD" />
 
         <div className="grid grid-cols-12 gap-5">
-          {/* BIO */}
-          <HudFrame className="about-card col-span-12 lg:col-span-7 frame-cut p-6 sm:p-8" label="BIO.LOG">
-            <div className="flex items-start justify-between mb-4">
+          {/* ===== Hero player card ===== */}
+          <div className="about-card col-span-12 lg:col-span-7 relative card-base card-holo rounded-3xl p-6 sm:p-9 overflow-hidden card-tilt">
+            <div className="absolute -top-16 -right-16 w-72 h-72 rounded-full bg-neon-magenta/25 blur-3xl" />
+            <div className="absolute -bottom-16 -left-16 w-72 h-72 rounded-full bg-neon-cyan/20 blur-3xl" />
+
+            <div className="relative flex items-start justify-between flex-wrap gap-4 mb-6">
               <div>
-                <div className="hud-eyebrow">{profile.callsign}</div>
-                <div className="font-display text-2xl sm:text-3xl text-hud-text mt-1">
-                  PRODUCT ENGINEER
+                <span className="chip-magenta">CHARACTER CARD · S-RANK</span>
+                <div className="font-display text-3xl sm:text-5xl text-hud-text mt-3 leading-[1]">
+                  THE BUILDER
                 </div>
-                <div className="font-mono text-xs text-neon-cyan/80 mt-1">{profile.role}</div>
+                <div className="font-display text-sm mt-2 text-holo tracking-[0.18em]">
+                  PRODUCT ENGINEER · OPS HACKER · UI CRAFTER
+                </div>
               </div>
-              <div className="font-mono text-[11px] text-right">
-                <div className="text-hud-dim uppercase tracking-[0.2em] text-[9px]">CLASS</div>
-                <div className="text-hud-text mt-1">BUILDER/OPS</div>
+              <div className="text-right">
+                <div className="font-display text-7xl sm:text-8xl text-rainbow leading-none">
+                  S
+                </div>
+                <div className="font-mono uppercase tracking-[0.3em] text-[10px] text-hud-dim mt-1">
+                  RANK
+                </div>
               </div>
             </div>
 
-            <div className="hud-divider my-4" />
+            <div className="hud-divider my-5" />
 
-            <p className="text-hud-text/85 leading-relaxed font-sans">
+            <p className="relative text-hud-text/90 leading-relaxed text-base sm:text-lg">
               {profile.bio}
             </p>
 
-            <div className="mt-6 grid grid-cols-2 sm:grid-cols-4 gap-3">
-              <Stat label="LOC" value="BLR · IN" />
-              <Stat label="EDU" value="MAIT" />
-              <Stat label="FOCUS" value="AI · OPS" />
+            <div className="relative mt-6 grid grid-cols-2 sm:grid-cols-4 gap-3">
+              <Stat label="LOC" value="BLR · IN" accent="cyan" />
+              <Stat label="EDU" value="MAIT" accent="violet" />
+              <Stat label="FOCUS" value="AI · OPS" accent="magenta" />
               <Stat label="STATUS" value="HIRING-READY" accent="lime" />
             </div>
-          </HudFrame>
+          </div>
 
-          {/* LOCATION HOLO */}
-          <HudFrame
-            className="about-card col-span-12 lg:col-span-5 frame-cut p-6 flex flex-col"
-            label="GEO.LINK"
-            accent="magenta">
-            <div className="flex items-center justify-between mb-4">
-              <div className="font-mono text-[11px] text-hud-dim uppercase tracking-[0.25em]">
-                COORDINATES
-              </div>
-              <div className="font-mono text-[11px] text-neon-magenta">
+          {/* ===== Holo globe ===== */}
+          <div className="about-card col-span-12 lg:col-span-5 relative card-base card-holo card-violet rounded-3xl p-6 flex flex-col overflow-hidden card-tilt">
+            <div className="absolute -top-10 -right-10 w-44 h-44 rounded-full bg-neon-violet/30 blur-3xl" />
+            <div className="flex items-center justify-between mb-3">
+              <span className="chip-violet">MAP · WORLD</span>
+              <span className="font-mono text-[11px] text-neon-violet">
                 12.97°N · 77.59°E
-              </div>
+              </span>
             </div>
-            <div className="relative w-full h-[260px] sm:h-[300px]">
+            <div className="relative w-full h-[260px] sm:h-[290px]">
               <HoloGlobe />
-              <div className="absolute bottom-2 left-2 right-2 flex items-center justify-between font-mono text-[10px] uppercase tracking-[0.25em]">
-                <span className="text-neon-magenta">▲ BANGALORE.IN</span>
-                <span className="text-hud-dim">REMOTE-READY</span>
-              </div>
             </div>
-            <p className="font-sans text-sm text-hud-text/80 mt-2">
-              Based in Bangalore. Flexible across timezones — open to remote roles worldwide.
+            <div className="font-display text-xl text-hud-text mt-2">
+              Bangalore <span className="text-neon-magenta">·</span> India
+            </div>
+            <p className="font-sans text-sm text-hud-text/75 mt-1">
+              Flexible across timezones — open to remote roles worldwide.
             </p>
-          </HudFrame>
+          </div>
 
-          {/* TECH STACK */}
-          <HudFrame
-            className="about-card col-span-12 lg:col-span-7 frame-cut p-6 sm:p-8"
-            label="LOADOUT.SKILLS"
-            accent="lime">
-            <div className="flex items-center justify-between mb-6">
-              <div className="font-display text-xl text-hud-text">TECH LOADOUT</div>
-              <div className="font-mono text-[11px] text-neon-lime">
-                {Object.values(skills).flat().length} MODULES
+          {/* ===== Tech loadout ===== */}
+          <div className="about-card col-span-12 lg:col-span-7 relative card-base card-holo card-cyan rounded-3xl p-6 sm:p-9 overflow-hidden card-tilt">
+            <div className="absolute -top-16 -right-16 w-60 h-60 rounded-full bg-neon-cyan/20 blur-3xl" />
+
+            <div className="relative flex items-center justify-between mb-6">
+              <div>
+                <span className="chip-cyan">INVENTORY · LOADOUT</span>
+                <div className="font-display text-2xl sm:text-3xl text-hud-text mt-2">
+                  EQUIPPED <span className="text-holo">POWERS</span>
+                </div>
               </div>
+              <span className="font-mono text-[11px] text-neon-cyan">
+                {Object.values(skills).flat().length} MODULES
+              </span>
             </div>
-            <div className="grid sm:grid-cols-2 gap-x-8 gap-y-6">
+            <div className="relative grid sm:grid-cols-2 gap-x-8 gap-y-6">
               {Object.entries(skills).map(([group, items]) => (
                 <div key={group}>
-                  <div className="font-mono text-[11px] uppercase tracking-[0.25em] text-neon-cyan/80 mb-3">
-                    [{group}]
+                  <div className="font-display text-[11px] uppercase tracking-[0.3em] text-holo mb-3">
+                    ▸ {group}
                   </div>
                   <div className="space-y-3.5">
                     {items.map((s) => (
@@ -140,91 +139,92 @@ const About = () => {
                 </div>
               ))}
             </div>
-          </HudFrame>
+          </div>
 
-          {/* ACHIEVEMENTS */}
-          <HudFrame
-            className="about-card col-span-12 lg:col-span-5 frame-cut p-6 sm:p-8"
-            label="ACHIEVEMENTS"
-            accent="amber">
-            <div className="flex items-center justify-between mb-4">
-              <div className="font-display text-xl text-hud-text">CERTS · UNLOCKED</div>
-              <div className="font-mono text-[11px] text-neon-amber">
-                {achievements.length} / {achievements.length}
+          {/* ===== Trophy cabinet ===== */}
+          <div className="about-card col-span-12 lg:col-span-5 relative card-base card-holo card-amber rounded-3xl p-6 sm:p-8 overflow-hidden card-tilt">
+            <div className="absolute -top-10 -right-10 w-48 h-48 rounded-full bg-neon-amber/25 blur-3xl" />
+            <div className="relative flex items-center justify-between mb-5">
+              <div>
+                <span className="chip-amber">TROPHY ROOM</span>
+                <div className="font-display text-2xl text-hud-text mt-2">
+                  ACHIEVEMENTS
+                </div>
               </div>
+              <span className="font-mono text-[11px] text-neon-amber">
+                {achievements.length} / {achievements.length}
+              </span>
             </div>
-            <ul className="space-y-3">
+            <ul className="relative space-y-3">
               {achievements.map((a) => (
                 <li
                   key={a.code}
-                  className="flex items-center gap-3 p-3 border border-hud-line bg-void-700/40 frame-cut-sm">
+                  className="group flex items-center gap-3 p-3 rounded-2xl border border-hud-line bg-void-700/40 hover:border-neon-amber/60 transition-all duration-300">
                   <span
-                    className={`shrink-0 inline-flex items-center justify-center w-9 h-9 border-2 font-display text-[11px] ${
-                      tierStyles[a.tier] || 'border-hud-line text-hud-text'
-                    }`}>
-                    {a.tier[0]}
+                    className={`shrink-0 inline-flex items-center justify-center w-11 h-11 rounded-xl font-display text-base font-black tier-${a.tier}`}>
+                    {a.tier}
                   </span>
                   <div className="flex-1 min-w-0">
-                    <div className="text-sm text-hud-text truncate">{a.title}</div>
-                    <div className="font-mono text-[10px] text-hud-dim uppercase tracking-[0.2em] mt-0.5">
-                      {a.issuer}
+                    <div className="text-[15px] text-hud-text truncate">{a.title}</div>
+                    <div className="font-mono text-[10px] text-hud-dim uppercase tracking-[0.22em] mt-0.5">
+                      {a.issuer} · {a.label}
                     </div>
                   </div>
-                  <span className="font-mono text-[10px] text-neon-cyan/80">{a.code}</span>
                 </li>
               ))}
             </ul>
-          </HudFrame>
+          </div>
 
-          {/* EDUCATION */}
-          <HudFrame
-            className="about-card col-span-12 sm:col-span-7 frame-cut p-6"
-            label="EDU.LOG">
-            <div className="flex items-center justify-between mb-3">
-              <div className="font-mono text-[11px] uppercase tracking-[0.25em] text-hud-dim">
-                ACADEMY
-              </div>
-              <span className="chip chip-cyan">{education.status}</span>
+          {/* ===== Education ===== */}
+          <div className="about-card col-span-12 sm:col-span-7 relative card-base card-holo card-lime rounded-3xl p-6 sm:p-7 overflow-hidden card-tilt">
+            <div className="absolute -bottom-10 -right-10 w-40 h-40 rounded-full bg-neon-lime/20 blur-3xl" />
+            <div className="relative flex items-center justify-between mb-3">
+              <span className="chip-lime">ACADEMY</span>
+              <span className="chip-soft">{education.status}</span>
             </div>
-            <div className="font-display text-xl text-hud-text">{education.school}</div>
-            <div className="font-mono text-xs text-hud-text/80 mt-1">{education.degree}</div>
-            <div className="font-mono text-[11px] text-neon-cyan mt-2 uppercase tracking-[0.25em]">
+            <div className="relative font-display text-2xl text-hud-text">{education.school}</div>
+            <div className="font-mono text-sm text-hud-text/80 mt-1">{education.degree}</div>
+            <div className="font-display text-[12px] text-holo mt-3 tracking-[0.22em]">
               {education.duration}
             </div>
-          </HudFrame>
+          </div>
 
-          {/* COMMS */}
-          <HudFrame
-            className="about-card col-span-12 sm:col-span-5 frame-cut p-6 flex flex-col justify-between"
-            label="COMMS.PING"
-            accent="magenta">
-            <div>
-              <div className="font-mono text-[11px] uppercase tracking-[0.25em] text-hud-dim mb-2">
+          {/* ===== Comms ping ===== */}
+          <div className="about-card col-span-12 sm:col-span-5 relative card-base card-holo card-magenta rounded-3xl p-6 flex flex-col justify-between overflow-hidden card-tilt">
+            <div className="absolute -top-10 -right-10 w-44 h-44 rounded-full bg-neon-magenta/30 blur-3xl" />
+            <div className="relative">
+              <span className="chip-magenta">COMMS · PING</span>
+              <div className="font-mono text-xs text-hud-dim uppercase tracking-[0.25em] mt-3">
                 DIRECT LINK
               </div>
-              <div className="font-display text-lg sm:text-xl text-neon-magenta break-all">
+              <div className="font-display text-lg sm:text-xl text-hud-text break-all mt-1">
                 {profile.email}
               </div>
             </div>
-            <button
-              onClick={handleCopy}
-              className="neon-btn-magenta mt-5 w-full justify-center">
-              {hasCopied ? '> COPIED ✓' : '> COPY ADDRESS'}
+            <button onClick={handleCopy} className="btn-primary mt-5 justify-center w-full">
+              {hasCopied ? 'COPIED ✓' : 'COPY ADDRESS'}
             </button>
-          </HudFrame>
+          </div>
         </div>
       </div>
     </section>
   );
 };
 
-const Stat = ({ label, value, accent }) => (
-  <div className="border border-hud-line bg-void-700/40 p-3 frame-cut-sm">
-    <div className="font-mono uppercase tracking-[0.2em] text-[9px] text-hud-dim">{label}</div>
-    <div className={`mt-1 font-display text-sm ${accent === 'lime' ? 'text-neon-lime' : 'text-hud-text'}`}>
-      {value}
+const Stat = ({ label, value, accent }) => {
+  const color = {
+    cyan: 'text-neon-cyan',
+    magenta: 'text-neon-magenta',
+    lime: 'text-neon-lime',
+    violet: 'text-neon-violet',
+    gold: 'text-neon-gold',
+  };
+  return (
+    <div className="rounded-xl border border-hud-line bg-void-700/40 p-3">
+      <div className="font-mono uppercase tracking-[0.22em] text-[9px] text-hud-dim">{label}</div>
+      <div className={`mt-1 font-display text-sm ${color[accent] || 'text-hud-text'}`}>{value}</div>
     </div>
-  </div>
-);
+  );
+};
 
 export default About;

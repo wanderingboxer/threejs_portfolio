@@ -1,10 +1,11 @@
 import { useEffect, useState } from 'react';
 
 import { navLinks, profile } from '../constants/index.js';
-import SystemClock from '../components/SystemClock.jsx';
+import LiveTime from '../components/LiveTime.jsx';
+import MuteToggle from '../components/MuteToggle.jsx';
 
 const NavItems = ({ onClick, activeId }) => (
-  <ul className="flex flex-col sm:flex-row gap-1 sm:gap-1">
+  <ul className="flex flex-col sm:flex-row gap-1 sm:gap-1.5">
     {navLinks.map((item) => {
       const active = activeId === item.href.slice(1);
       return (
@@ -12,14 +13,26 @@ const NavItems = ({ onClick, activeId }) => (
           <a
             href={item.href}
             onClick={onClick}
-            className={`group relative flex items-center gap-2 px-3 py-2 font-mono text-[11px] uppercase tracking-[0.25em] transition-colors ${
-              active ? 'text-neon-cyan' : 'text-hud-dim hover:text-hud-text'
-            }`}>
-            <span className="text-neon-cyan/60 group-hover:text-neon-cyan">[{item.key}]</span>
-            <span className="holo-underline">{item.name}</span>
-            {active && (
-              <span className="absolute -bottom-px left-3 right-3 h-px bg-neon-cyan shadow-neon-cyan" />
-            )}
+            className={`group relative flex items-center gap-2 px-3.5 py-2 rounded-full font-display text-[12px] font-bold uppercase tracking-[0.18em] transition-all duration-300 ${
+              active
+                ? 'text-void-900 shadow-neon-magenta'
+                : 'text-hud-text hover:text-white'
+            }`}
+            style={
+              active
+                ? {
+                    background:
+                      'linear-gradient(90deg, #00F0FF 0%, #9B5DE5 50%, #FF2E97 100%)',
+                  }
+                : {}
+            }>
+            <span
+              className={
+                active ? 'text-void-900/70' : 'text-neon-cyan/70 group-hover:text-neon-cyan'
+              }>
+              {item.key}
+            </span>
+            <span>{item.name}</span>
           </a>
         </li>
       );
@@ -41,16 +54,10 @@ const Navbar = () => {
 
   useEffect(() => {
     const ids = navLinks.map((l) => l.href.slice(1));
-    const sections = ids
-      .map((id) => document.getElementById(id))
-      .filter(Boolean);
+    const sections = ids.map((id) => document.getElementById(id)).filter(Boolean);
     if (!sections.length) return;
     const obs = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) setActive(entry.target.id);
-        });
-      },
+      (entries) => entries.forEach((e) => e.isIntersecting && setActive(e.target.id)),
       { rootMargin: '-40% 0px -55% 0px', threshold: 0 }
     );
     sections.forEach((s) => obs.observe(s));
@@ -59,36 +66,41 @@ const Navbar = () => {
 
   return (
     <header
-      className={`fixed top-0 inset-x-0 z-50 transition-colors duration-300 ${
-        scrolled ? 'bg-void-900/85 backdrop-blur border-b border-hud-line' : 'bg-transparent'
+      className={`fixed top-0 inset-x-0 z-50 transition-all duration-300 ${
+        scrolled ? 'bg-void-900/85 backdrop-blur-md border-b border-hud-line' : 'bg-transparent'
       }`}>
-      {/* Top sysbar */}
-      <div className="hidden md:flex container-x c-space pt-3 items-center justify-between text-[10px] font-mono uppercase tracking-[0.3em] text-hud-dim">
-        <div className="flex items-center gap-4">
-          <span className="text-neon-cyan/80">SYS://PORTFOLIO.LIVE</span>
-          <span className="text-hud-dim">·</span>
-          <span>{profile.codename}</span>
+      <div className="hidden md:flex container-x c-space pt-3 items-center justify-between text-[10px] font-mono uppercase tracking-[0.3em]">
+        <div className="flex items-center gap-4 text-hud-dim">
+          <span className="text-holo">PORTFOLIO.LIVE</span>
+          <span>·</span>
+          <span>{profile.handle}</span>
         </div>
-        <div className="flex items-center gap-4">
-          <span className="flex items-center gap-2">
-            <span className="blink-dot" /> ONLINE
+        <div className="flex items-center gap-4 text-hud-dim">
+          <span className="flex items-center gap-2 text-neon-lime">
+            <span className="dot-lime" /> ONLINE
           </span>
-          <SystemClock />
+          <LiveTime />
         </div>
       </div>
 
       <div className="container-x c-space">
         <div className="flex items-center justify-between py-3 sm:py-4">
           <a href="#home" className="flex items-center gap-3">
-            <span className="relative inline-flex w-8 h-8 items-center justify-center border border-neon-cyan/60 text-neon-cyan font-display font-black text-sm">
+            <span
+              className="relative inline-flex w-9 h-9 items-center justify-center rounded-xl font-display font-black text-sm text-void-900"
+              style={{
+                background:
+                  'linear-gradient(135deg, #00F0FF 0%, #9B5DE5 50%, #FF2E97 100%)',
+                boxShadow: '0 0 18px rgba(155,93,229,0.55)',
+              }}>
               A
-              <span className="absolute -top-px -right-px w-1.5 h-1.5 bg-neon-magenta" />
+              <span className="absolute -top-1 -right-1 w-2 h-2 rounded-full bg-neon-gold animate-blink" />
             </span>
             <div className="leading-tight">
               <div className="font-display text-sm tracking-[0.18em] text-hud-text">
                 ADITYA.SAXENA
               </div>
-              <div className="hidden sm:block font-mono text-[10px] tracking-[0.3em] text-neon-cyan/70">
+              <div className="hidden sm:block font-mono text-[10px] tracking-[0.3em] text-holo">
                 BUILDER · SHIPPER · OPERATOR
               </div>
             </div>
@@ -96,20 +108,18 @@ const Navbar = () => {
 
           <button
             onClick={() => setOpen((o) => !o)}
-            className="sm:hidden text-hud-text border border-hud-line w-9 h-9 flex items-center justify-center font-mono"
+            className="sm:hidden text-hud-text border border-hud-line w-9 h-9 flex items-center justify-center rounded-full"
             aria-label="Toggle menu">
             {open ? '×' : '≡'}
           </button>
 
-          <nav className="hidden sm:block">
+          <nav className="hidden sm:flex items-center gap-3">
             <NavItems activeId={active} />
+            <MuteToggle />
           </nav>
         </div>
 
-        <div
-          className={`sm:hidden overflow-hidden transition-[max-height] duration-300 ease-in-out ${
-            open ? 'max-h-96' : 'max-h-0'
-          }`}>
+        <div className={`sm:hidden overflow-hidden transition-[max-height] duration-300 ease-in-out ${open ? 'max-h-96' : 'max-h-0'}`}>
           <div className="py-3 border-t border-hud-line">
             <NavItems activeId={active} onClick={() => setOpen(false)} />
           </div>

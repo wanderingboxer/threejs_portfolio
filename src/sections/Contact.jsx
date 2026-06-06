@@ -3,7 +3,6 @@ import { useRef, useState } from 'react';
 
 import useAlert from '../hooks/useAlert.js';
 import Alert from '../components/Alert.jsx';
-import HudFrame from '../components/HudFrame.jsx';
 import { profile } from '../constants/index.js';
 
 const Contact = () => {
@@ -18,7 +17,6 @@ const Contact = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
-
     try {
       await emailjs.send(
         import.meta.env.VITE_APP_EMAILJS_SERVICE_ID,
@@ -33,66 +31,70 @@ const Contact = () => {
         import.meta.env.VITE_APP_EMAILJS_PUBLIC_KEY
       );
       setLoading(false);
-      showAlert({ type: 'success', text: 'Message sent. Stand by for response.' });
+      showAlert({ type: 'success', text: 'Message sent. I\'ll reply soon ✨' });
       setForm({ name: '', email: '', message: '' });
     } catch (error) {
       setLoading(false);
       console.error(error);
-      showAlert({ type: 'danger', text: 'Transmission failed. Try again or email directly.' });
+      showAlert({ type: 'danger', text: 'Send failed. Email me directly?' });
     }
   };
 
   return (
-    <section id="comms" className="section-wrap">
+    <section id="comms" className="section-wrap relative">
       {alert.show && <Alert {...alert} />}
-      <div className="container-x c-space">
-        <div className="flex items-end justify-between gap-6 mb-10">
+      <div className="aurora" />
+      <div className="container-x c-space relative">
+        <div className="flex items-end justify-between gap-6 mb-10 flex-wrap">
           <div>
-            <div className="hud-eyebrow text-neon-cyan/80">// SECTOR 05 — COMMS CHANNEL</div>
+            <div className="hud-eyebrow text-neon-cyan/80">// LEVEL 05 — JOIN PARTY</div>
             <h2 className="display-text mt-3 text-4xl sm:text-6xl">
-              <span className="text-hud-text">INITIATE</span>{' '}
-              <span className="text-gradient-cyber">CONTACT</span>
+              <span className="text-hud-text">LET'S</span>{' '}
+              <span className="text-holo">PLAY</span>
             </h2>
           </div>
           <div className="hidden md:flex items-center gap-2 font-mono text-[11px] text-hud-dim">
-            <span className="blink-dot" /> LINK ESTABLISHED
+            <span className="dot-lime" /> LINK ESTABLISHED
           </div>
         </div>
 
         <div className="grid grid-cols-12 gap-5 items-stretch">
-          {/* Form */}
-          <HudFrame
-            className="col-span-12 lg:col-span-7 frame-cut p-6 sm:p-8 relative overflow-hidden"
-            label="OUTGOING.MSG">
-            <div className="absolute inset-0 bg-grid-dense opacity-20 pointer-events-none" />
+          {/* ===== Form ===== */}
+          <div className="col-span-12 lg:col-span-7 relative card-base card-holo card-magenta rounded-3xl p-6 sm:p-9 overflow-hidden">
+            <div className="absolute -top-20 -right-20 w-72 h-72 rounded-full bg-neon-magenta/25 blur-3xl pointer-events-none" />
+            <div className="absolute -bottom-20 -left-20 w-72 h-72 rounded-full bg-neon-cyan/20 blur-3xl pointer-events-none" />
 
             <div className="relative">
-              <div className="font-mono text-[11px] text-hud-dim uppercase tracking-[0.25em] mb-4">
-                <span className="text-neon-cyan">{'>'}</span> COMPOSE TRANSMISSION
-              </div>
+              <span className="chip-magenta">DM ME · QUEST INVITE</span>
+              <h3 className="font-display text-3xl sm:text-4xl text-hud-text mt-3">
+                Got a build in mind?
+              </h3>
+              <p className="font-sans text-hud-text/75 mt-2 max-w-md">
+                Brief, timeline, or just say hi. I read everything and reply fast.
+              </p>
 
-              <form ref={formRef} onSubmit={handleSubmit} className="space-y-5">
+              <form ref={formRef} onSubmit={handleSubmit} className="mt-7 space-y-5">
                 <div className="grid sm:grid-cols-2 gap-5">
                   <Field
-                    label="CALLSIGN / NAME"
+                    label="YOUR NAME"
                     name="name"
                     value={form.name}
                     onChange={handleChange}
                     placeholder="ex. John Doe"
                   />
                   <Field
-                    label="RETURN FREQ / EMAIL"
+                    label="EMAIL"
                     name="email"
                     type="email"
                     value={form.email}
                     onChange={handleChange}
-                    placeholder="ex. john@domain.com"
+                    placeholder="you@domain.com"
                   />
                 </div>
 
                 <div>
-                  <div className="font-mono text-[10px] text-neon-cyan/80 uppercase tracking-[0.25em] mb-2">
-                    PAYLOAD / MESSAGE
+                  <div className="font-display text-[10px] text-holo uppercase tracking-[0.3em] mb-2">
+                    MESSAGE
                   </div>
                   <textarea
                     name="message"
@@ -101,60 +103,62 @@ const Contact = () => {
                     rows={6}
                     required
                     placeholder="Share the brief, the timeline, the dream..."
-                    className="field-input-cyber resize-none"
+                    className="field-cyber resize-none"
                   />
                 </div>
 
                 <button
                   type="submit"
                   disabled={loading}
-                  className="neon-btn w-full justify-center !py-4 disabled:opacity-50">
-                  {loading ? '> TRANSMITTING ...' : '> SEND TRANSMISSION'}
+                  className="btn-primary w-full justify-center !py-4 disabled:opacity-50">
+                  {loading ? 'SENDING ...' : 'SEND IT'}
                   {!loading && <span>↗</span>}
                 </button>
               </form>
             </div>
-          </HudFrame>
+          </div>
 
-          {/* Side info */}
+          {/* ===== Side info ===== */}
           <div className="col-span-12 lg:col-span-5 space-y-5 flex flex-col">
-            <HudFrame className="frame-cut p-6" label="DIRECT.LINKS" accent="magenta">
-              <div className="space-y-4 font-mono text-sm">
-                <Row label="EMAIL" value={profile.email} href={`mailto:${profile.email}`} />
-                <Row label="PHONE" value={profile.phone} href={`tel:${profile.phone.replace(/\s/g, '')}`} />
-                <Row label="GITHUB" value="@wanderingboxer" href={profile.socials.github} />
-                <Row label="LINKEDIN" value="aditya-saxena" href={profile.socials.linkedin} />
-                <Row label="LEETCODE" value="AdityaSaxena4052" href={profile.socials.leetcode} />
+            <div className="relative card-base card-holo card-cyan rounded-3xl p-6 overflow-hidden">
+              <div className="absolute -top-10 -right-10 w-40 h-40 rounded-full bg-neon-cyan/25 blur-3xl pointer-events-none" />
+              <div className="relative">
+                <span className="chip-cyan">CHANNELS</span>
+                <div className="font-display text-xl text-hud-text mt-3 mb-4">
+                  Where to find me
+                </div>
+                <div className="space-y-3 font-mono text-sm">
+                  <Row label="EMAIL" value={profile.email} href={`mailto:${profile.email}`} />
+                  <Row
+                    label="PHONE"
+                    value={profile.phone}
+                    href={`tel:${profile.phone.replace(/\s/g, '')}`}
+                  />
+                  <Row label="GITHUB" value="@wanderingboxer" href={profile.socials.github} />
+                  <Row label="LINKEDIN" value="aditya-saxena" href={profile.socials.linkedin} />
+                  <Row label="LEETCODE" value="AdityaSaxena4052" href={profile.socials.leetcode} />
+                </div>
               </div>
-            </HudFrame>
+            </div>
 
-            <HudFrame className="frame-cut p-6 flex-1" label="AVAILABILITY" accent="lime">
-              <div className="grid grid-cols-2 gap-4">
-                <div>
-                  <div className="font-mono text-[10px] uppercase tracking-[0.25em] text-hud-dim">STATUS</div>
-                  <div className="mt-1 font-display text-lg text-neon-lime flex items-center gap-2">
-                    <span className="blink-dot" /> ONLINE
-                  </div>
+            <div className="relative card-base card-holo card-lime rounded-3xl p-6 flex-1 overflow-hidden">
+              <div className="absolute -bottom-10 -right-10 w-44 h-44 rounded-full bg-neon-lime/25 blur-3xl pointer-events-none" />
+              <div className="relative">
+                <span className="chip-lime">AVAILABILITY</span>
+                <div className="font-display text-xl text-hud-text mt-3">Open to play</div>
+                <div className="mt-5 grid grid-cols-2 gap-4">
+                  <Mini label="STATUS" value="ONLINE" accent="lime" />
+                  <Mini label="SECTOR" value="BLR · IST" />
+                  <Mini label="REPLY" value="< 24 HRS" />
+                  <Mini label="OPEN TO" value="FT · INTERN" />
                 </div>
-                <div>
-                  <div className="font-mono text-[10px] uppercase tracking-[0.25em] text-hud-dim">SECTOR</div>
-                  <div className="mt-1 font-display text-lg text-hud-text">BLR · IST</div>
-                </div>
-                <div>
-                  <div className="font-mono text-[10px] uppercase tracking-[0.25em] text-hud-dim">RESPONSE</div>
-                  <div className="mt-1 font-display text-lg text-hud-text">&lt; 24 HRS</div>
-                </div>
-                <div>
-                  <div className="font-mono text-[10px] uppercase tracking-[0.25em] text-hud-dim">OPEN TO</div>
-                  <div className="mt-1 font-display text-lg text-hud-text">FT · INTERN</div>
-                </div>
+                <div className="hud-divider my-5" />
+                <p className="text-sm text-hud-text/80">
+                  Building something cool? AI, ops automation, full-stack, internal tools — I want
+                  in. Drop a line and I'll respond fast.
+                </p>
               </div>
-              <div className="hud-divider my-5" />
-              <p className="text-sm text-hud-text/80">
-                Building something cool? AI, ops automation, full-stack, internal tools — I want in.
-                Drop a line and I'll get back fast.
-              </p>
-            </HudFrame>
+            </div>
           </div>
         </div>
       </div>
@@ -164,10 +168,8 @@ const Contact = () => {
 
 const Field = ({ label, ...props }) => (
   <label className="block">
-    <div className="font-mono text-[10px] text-neon-cyan/80 uppercase tracking-[0.25em] mb-2">
-      {label}
-    </div>
-    <input required className="field-input-cyber" {...props} />
+    <div className="font-display text-[10px] text-holo uppercase tracking-[0.3em] mb-2">{label}</div>
+    <input required className="field-cyber" {...props} />
   </label>
 );
 
@@ -176,12 +178,23 @@ const Row = ({ label, value, href }) => (
     href={href}
     target="_blank"
     rel="noreferrer"
-    className="flex items-center justify-between gap-4 px-3 py-2 border border-hud-line hover:border-neon-magenta/60 hover:text-neon-magenta transition-colors group">
-    <span className="text-hud-dim text-[10px] uppercase tracking-[0.25em] group-hover:text-neon-magenta/80">
-      [{label}]
+    className="flex items-center justify-between gap-4 px-3.5 py-2.5 rounded-xl border border-hud-line hover:border-neon-magenta/60 hover:bg-neon-magenta/[0.04] transition-all group">
+    <span className="text-hud-dim text-[10px] uppercase tracking-[0.25em] group-hover:text-neon-magenta">
+      {label}
     </span>
     <span className="text-hud-text group-hover:text-neon-magenta truncate">{value}</span>
   </a>
+);
+
+const Mini = ({ label, value, accent }) => (
+  <div>
+    <div className="font-mono text-[10px] uppercase tracking-[0.25em] text-hud-dim">{label}</div>
+    <div
+      className={`mt-1 font-display text-lg ${accent === 'lime' ? 'text-neon-lime flex items-center gap-2' : 'text-hud-text'}`}>
+      {accent === 'lime' && <span className="dot-lime" />}
+      {value}
+    </div>
+  </div>
 );
 
 export default Contact;

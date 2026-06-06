@@ -3,12 +3,12 @@ const Alert = ({ type, text }) => {
   return (
     <div className="fixed bottom-6 right-6 z-[100]">
       <div
-        className={`hud-panel frame-cut-sm flex items-center gap-3 px-4 py-3 font-mono text-xs ${
-          isErr ? 'border-hud-err/60 text-hud-err' : 'border-hud-ok/60 text-hud-ok'
+        className={`relative card-base card-holo rounded-2xl px-4 py-3 flex items-center gap-3 font-mono text-xs ${
+          isErr ? 'card-magenta text-neon-magenta' : 'card-lime text-neon-lime'
         }`}>
-        <span className={`blink-dot${isErr ? '-magenta' : ''}`} />
+        <span className={`dot ${isErr ? 'dot-magenta' : 'dot-lime'}`} />
         <span className="uppercase tracking-[0.25em]">
-          {isErr ? '> TRANSMISSION FAILED' : '> TRANSMISSION RECEIVED'}
+          {isErr ? 'TRANSMISSION FAILED' : 'MESSAGE SENT'}
         </span>
         <span className="text-hud-text/90">{text}</span>
       </div>
