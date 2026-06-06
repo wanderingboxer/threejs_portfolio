@@ -1,176 +1,207 @@
+export const profile = {
+  callsign: 'ADITYA SAXENA',
+  codename: 'PILOT-04052',
+  role: 'BUILDER · SHIPPER · OPERATOR',
+  tagline:
+    'Engineering AI agents, sales automation and full-stack experiences that ship to real users.',
+  bio: 'B.Tech EEE student turned product engineer. Currently building AI calling agents, sales automation pipelines and internal tools at GoComet — work that books real meetings, runs on real office TVs and reaches real CEOs.',
+  location: 'BANGALORE, INDIA',
+  geo: { lat: 12.9716, lng: 77.5946, label: 'BLR' },
+  email: 'aditya.saxena4052@gmail.com',
+  phone: '+91-8076280374',
+  socials: {
+    github: 'https://github.com/wanderingboxer',
+    linkedin: 'https://www.linkedin.com/in/aditya-saxena-298474250/',
+    leetcode: 'https://leetcode.com/u/AdityaSaxena4052/',
+  },
+};
+
 export const navLinks = [
+  { id: 1, key: '01', name: 'HOME', href: '#home' },
+  { id: 2, key: '02', name: 'PROFILE', href: '#profile' },
+  { id: 3, key: '03', name: 'MISSIONS', href: '#missions' },
+  { id: 4, key: '04', name: 'LOG', href: '#log' },
+  { id: 5, key: '05', name: 'COMMS', href: '#comms' },
+];
+
+export const stats = [
+  { label: 'YRS BUILDING', value: '04', accent: 'cyan' },
+  { label: 'PROJECTS SHIPPED', value: '20+', accent: 'magenta' },
+  { label: 'AI AGENTS DEPLOYED', value: '04', accent: 'lime' },
+  { label: 'MEETINGS BOOKED', value: '26', accent: 'amber' },
+];
+
+export const skills = {
+  Languages: [
+    { name: 'TypeScript', level: 92 },
+    { name: 'JavaScript', level: 95 },
+    { name: 'Python', level: 78 },
+    { name: 'C / C++', level: 72 },
+  ],
+  Frameworks: [
+    { name: 'React.js', level: 95 },
+    { name: 'Next.js', level: 90 },
+    { name: 'Three.js / R3F', level: 78 },
+    { name: 'Express.js', level: 80 },
+    { name: 'Tailwind CSS', level: 95 },
+    { name: 'GSAP', level: 85 },
+  ],
+  'AI & Ops': [
+    { name: 'LangChain', level: 78 },
+    { name: 'Claude / Gemini Prompts', level: 88 },
+    { name: 'n8n Automations', level: 90 },
+    { name: 'ElevenLabs · Twilio', level: 82 },
+    { name: 'Google Vertex AI', level: 75 },
+  ],
+  'Tools & Infra': [
+    { name: 'Node.js', level: 88 },
+    { name: 'MongoDB', level: 80 },
+    { name: 'Git / GitHub', level: 92 },
+    { name: 'LTspice', level: 70 },
+  ],
+};
+
+export const achievements = [
   {
-    id: 1,
-    name: 'Home',
-    href: '#home',
+    code: 'ACH-01',
+    title: 'Machine Learning Specialization',
+    issuer: 'Stanford University',
+    tier: 'GOLD',
   },
   {
-    id: 2,
-    name: 'About',
-    href: '#about',
+    code: 'ACH-02',
+    title: 'AI Product Manager',
+    issuer: 'Microsoft',
+    tier: 'GOLD',
   },
   {
-    id: 3,
-    name: 'Work',
-    href: '#work',
+    code: 'ACH-03',
+    title: 'Product Manager',
+    issuer: 'IBM',
+    tier: 'SILVER',
   },
   {
-    id: 4,
-    name: 'Contact',
-    href: '#contact',
+    code: 'ACH-04',
+    title: 'UX Design',
+    issuer: 'Microsoft',
+    tier: 'SILVER',
+  },
+  {
+    code: 'ACH-05',
+    title: 'Generative AI for Product Managers',
+    issuer: 'PM School',
+    tier: 'BRONZE',
   },
 ];
 
 export const myProjects = [
   {
-    title: 'Super Saiyan Scroll - Immersive Interactive Experience',
-    desc: 'Super Saiyan Scroll is an interactive web experience that takes users on a journey through the Dragon Ball Z universe. It features a dynamic scroll-based interface that allows users to explore the world of Dragon Ball Z in a unique and engaging way.',
-    subdesc:
-      'Built with React.js, Gsap, and TailwindCSS, Super Saiyan Scroll combines cutting-edge technology with stunning visuals to create an immersive experience that will delight fans of the series.',
-    href: 'https://super-saiyan-scroll-809zuz1ks-aditya-saxenas-projects-14f18c2d.vercel.app/',
+    id: 'M01',
+    code: 'M-01',
+    title: 'GoComet Townhall',
+    sub: 'Kahoot-style multiplayer quiz & anonymous Q&A',
+    status: 'DEPLOYED',
+    impact: '~200 live participants · used by CEO',
+    desc: 'Built a Kahoot-style multiplayer quiz platform deployed live at GoComet\'s company-wide townhall. ~200 employees played in real time, while anonymous Q&A let them submit questions openly — moderated and surfaced on stage for the CEO to answer live.',
+    metrics: [
+      { label: 'PARTICIPANTS', value: '200+' },
+      { label: 'TOWNHALLS', value: 'COMPANY-WIDE' },
+      { label: 'MODE', value: 'REALTIME' },
+    ],
+    href: 'https://github.com/wanderingboxer/GoComet-Townhall',
     texture: '/textures/project/Project1.mp4',
-    logo: '/assets/project-logo1.png',
-    logoStyle: {
-      backgroundColor: '#2A1816',
-      border: '0.2px solid #36201D',
-      boxShadow: '0px 0px 60px 0px #AA3C304D',
-    },
-    spotlight: '/assets/spotlight1.png',
-    tags: [
-      {
-        id: 1,
-        name: 'React.js',
-        path: '/assets/react.svg',
-      },
-      {
-        id: 2,
-        name: 'TailwindCSS',
-        path: 'assets/tailwindcss.png',
-      },
-      {
-        id: 3,
-        name: 'JavaScript',
-        path: '/assets/JavaScript.png',
-      },
-      {
-        id: 4,
-        name: 'GSAP',
-        path: '/assets/GSAP.png',
-      },
-    ],
+    accent: 'magenta',
+    tags: ['React', 'TypeScript', 'Realtime', 'Tailwind'],
   },
   {
-    title: 'Imaginify - AI-Powered Image Processing Platform',
-    desc: 'Imaginify is a groundbreaking Software-as-a-Service application that empowers users to create stunning photo manipulations using AI technology. With features like AI-driven image editing, a payment system, and a credits-based model.',
-    subdesc:
-      'Built with Next.js, Cloudinary AI, Clerk, and Stripe, Imaginify combines cutting-edge technology with a user-centric approach. ',
-    href: 'https://imaginify-six-mu.vercel.app/',
+    id: 'M02',
+    code: 'M-02',
+    title: 'AE & BDR Sales Leaderboards',
+    sub: 'Real-time dashboards on every office TV',
+    status: 'LIVE · DAILY OPS',
+    impact: 'Shipped to sales floor — visible to entire org',
+    desc: 'Two production dashboards driving GoComet\'s sales culture. The BDR leaderboard tracks weekly meetings; the AE dashboard tracks monthly pipeline. Both render on office TVs across the sales floor — turning quotas into a live scoreboard the whole team plays against.',
+    metrics: [
+      { label: 'DASHBOARDS', value: '02' },
+      { label: 'TEAMS', value: 'BDR + AE' },
+      { label: 'SURFACE', value: 'OFFICE TVS' },
+    ],
+    href: 'https://github.com/wanderingboxer/AE-Meetings-Leaderboard',
     texture: '/textures/project/Project2.mp4',
-    logo: '/assets/project-logo2.png',
-    logoStyle: {
-      backgroundColor: '#1C1A43',
-      border: '0.2px solid #252262',
-      boxShadow: '0px 0px 60px 0px #635BFF4D',
-    },
-    spotlight: '/assets/spotlight5.png',
-    tags: [
-      {
-        id: 1,
-        name: 'React.js',
-        path: '/assets/react.svg',
-      },
-      {
-        id: 2,
-        name: 'TailwindCSS',
-        path: 'assets/tailwindcss.png',
-      },
-      {
-        id: 3,
-        name: 'TypeScript',
-        path: '/assets/typescript.png',
-      },
-      {
-        id: 4,
-        name: 'Next.js',
-        path: '/assets/nextjs.png',
-      },
-    ],
+    accent: 'lime',
+    tags: ['Next.js', 'TypeScript', 'Realtime', 'OpsTooling'],
   },
   {
-    title: 'Zenova - Immersive Interactive Experience',
-    desc: 'Zenova is an interactive web experience inspired by Zentry. It features a dynamic scroll-based interface that allows users to explore the world of Zenova in a unique and engaging way.',
-    subdesc:
-      'Built with React.js, Gsap, and Tailwind CSS, Zenova combines cutting-edge technology with stunning visuals to create an immersive experience that will delight users.',
-    href: 'https://awwward-winning-website-2kfh7e50t.vercel.app/',
-    texture: '/textures/project/project3.mp4',
-    logo: '/assets/project-logo3.png',
-    logoStyle: {
-      backgroundColor: '#60f5a1',
-      background:
-        'linear-gradient(0deg, #60F5A150, #60F5A150), linear-gradient(180deg, rgba(255, 255, 255, 0.9) 0%, rgba(208, 213, 221, 0.8) 100%)',
-      border: '0.2px solid rgba(208, 213, 221, 1)',
-      boxShadow: '0px 0px 60px 0px rgba(35, 131, 96, 0.3)',
-    },
-    spotlight: '/assets/spotlight3.png',
-    tags: [
-      {
-        id: 1,
-        name: 'React.js',
-        path: '/assets/react.svg',
-      },
-      {
-        id: 2,
-        name: 'TailwindCSS',
-        path: 'assets/tailwindcss.png',
-      },
-      {
-        id: 3,
-        name: 'JavaScript',
-        path: '/assets/JavaScript.png',
-      },
-      {
-        id: 4,
-        name: 'GSAP',
-        path: '/assets/GSAP.png',
-      },
-    ],
-  },
-  {
-    title: 'AI-Nexus - AI-Powered Chat Application',
+    id: 'M03',
+    code: 'M-03',
+    title: 'AI-Nexus',
+    sub: 'LangChain + Claude chat with tool orchestration',
+    status: 'SHIPPED',
+    impact: 'Production-grade AI workspace',
     desc: 'A sophisticated AI chat application built with Next.js, featuring real-time conversations, advanced prompt caching, and intelligent tool orchestration powered by LangChain and Claude 3.5 Sonnet.',
-    subdesc:
-      'Built with Next.js, LangChain, Claude, and TypeScript, AI-Nexus provides a seamless and intuitive chat experience with advanced AI capabilities.',
+    metrics: [
+      { label: 'STACK', value: 'NEXT + LC' },
+      { label: 'MODEL', value: 'CLAUDE 3.5' },
+      { label: 'PATTERN', value: 'AGENT + TOOLS' },
+    ],
     href: 'https://ai-nexus-gold.vercel.app/',
     texture: '/textures/project/project4.mp4',
-    logo: '/assets/project-logo4.png',
-    logoStyle: {
-      backgroundColor: '#0E1F38',
-      border: '0.2px solid #0E2D58',
-      boxShadow: '0px 0px 60px 0px #2F67B64D',
-    },
-    spotlight: '/assets/spotlight4.png',
-    tags: [
-      {
-        id: 1,
-        name: 'LangChain',
-        path: '/assets/langchain.jpeg',
-      },
-      {
-        id: 2,
-        name: 'Claude',
-        path: 'assets/claude.png',
-      },
-      {
-        id: 3,
-        name: 'TypeScript',
-        path: '/assets/typescript.png',
-      },
-      {
-        id: 4,
-        name: 'Next.js',
-        path: '/assets/nextjs.png',
-      },
+    accent: 'cyan',
+    tags: ['Next.js', 'LangChain', 'Claude', 'TypeScript'],
+  },
+  {
+    id: 'M04',
+    code: 'M-04',
+    title: 'Imaginify',
+    sub: 'AI image SaaS — edit, restore, generate, sell',
+    status: 'SHIPPED',
+    impact: 'End-to-end SaaS with payments + credits',
+    desc: 'A SaaS platform that empowers users to create stunning photo manipulations using AI — image restoration, recolor, object removal, generative fill, background removal — paired with a credits model, Stripe payments and auth.',
+    metrics: [
+      { label: 'STACK', value: 'NEXT + TS' },
+      { label: 'AI', value: 'CLOUDINARY' },
+      { label: 'PAYMENTS', value: 'STRIPE' },
     ],
+    href: 'https://imaginify-six-mu.vercel.app/',
+    texture: '/textures/project/Project2.mp4',
+    accent: 'violet',
+    tags: ['Next.js', 'TypeScript', 'Cloudinary AI', 'Stripe'],
+  },
+  {
+    id: 'M05',
+    code: 'M-05',
+    title: 'Super Saiyan Scroll',
+    sub: 'Scroll-driven DBZ immersive experience',
+    status: 'SHIPPED',
+    impact: 'Showcase of motion + scroll storytelling',
+    desc: 'An immersive web experience inspired by Dragon Ball Super, built with React, GSAP and Tailwind. Smooth scroll animations, dynamic transitions and high-energy visuals — the browsing equivalent of unlocking Ultra Instinct.',
+    metrics: [
+      { label: 'MOTION', value: 'GSAP' },
+      { label: 'STACK', value: 'REACT' },
+      { label: 'STYLE', value: 'KINETIC' },
+    ],
+    href: 'https://super-saiyan-scroll-809zuz1ks-aditya-saxenas-projects-14f18c2d.vercel.app/',
+    texture: '/textures/project/Project1.mp4',
+    accent: 'amber',
+    tags: ['React', 'GSAP', 'Tailwind', 'JavaScript'],
+  },
+  {
+    id: 'M06',
+    code: 'M-06',
+    title: 'Zenova',
+    sub: 'Awwwards-inspired homage to Zentry',
+    status: 'SHIPPED',
+    impact: 'Reference build for animation craft',
+    desc: 'An interactive site inspired by Zentry — Awwwards Site Of The Month — exploring scroll-driven storytelling, dynamic transitions and immersive visuals built with React, GSAP and Tailwind.',
+    metrics: [
+      { label: 'STACK', value: 'REACT' },
+      { label: 'MOTION', value: 'GSAP' },
+      { label: 'CRAFT', value: 'HIGH' },
+    ],
+    href: 'https://awwward-winning-website-2kfh7e50t.vercel.app/',
+    texture: '/textures/project/project3.mp4',
+    accent: 'cyan',
+    tags: ['React', 'GSAP', 'Tailwind', 'JavaScript'],
   },
 ];
 
@@ -178,39 +209,68 @@ export const calculateSizes = (isSmall, isMobile, isTablet) => {
   return {
     deskScale: isSmall ? 0.05 : isMobile ? 0.06 : 0.065,
     deskPosition: isMobile ? [0.5, -4.5, 0] : [0.25, -5.5, 0],
-    cubePosition: isSmall ? [4, -5, 0] : isMobile ? [5, -5, 0] : isTablet ? [5, -5, 0] : [9, -5.5, 0],
-    reactLogoPosition: isSmall ? [3, 4, 0] : isMobile ? [5, 4, 0] : isTablet ? [5, 4, 0] : [12, 3, 0],
-    ringPosition: isSmall ? [-5, 7, 0] : isMobile ? [-10, 10, 0] : isTablet ? [-12, 10, 0] : [-24, 10, 0],
-    targetPosition: isSmall ? [-5, -10, -10] : isMobile ? [-9, -10, -10] : isTablet ? [-11, -7, -10] : [-13, -13, -10],
   };
 };
 
 export const workExperiences = [
   {
     id: 1,
-    name: 'DRDO',
-    pos: 'Research Trainee at SSPL Lab',
-    duration: 'Feb-April 2025',
-    title: "Worked as a Research Trainee at DRDO's Solid State Physics Lab (SSPL). Designed a laser frequency stabilisation locking system using the Pound-Drever-Hall technique, simulating and analysing its performance in LTspice. Researched on laser frequency drift mechanisms and factors affecting frequency stabilisation to enhance stabilisation techniques.",
-    icon: '/assets/DRDO.png',
+    code: 'LOG-2026',
+    timestamp: 'JAN 2026 — JUL 2026',
+    status: 'ONGOING',
+    company: 'GoComet',
+    role: 'Sales Enablement & Product Ops Intern',
+    location: 'BANGALORE',
+    icon: '/assets/star.png',
     animation: 'victory',
+    summary:
+      'Building AI agents, automations and prompt pipelines that move real revenue.',
+    objectives: [
+      'Shipped 4 region-specific AI outbound calling agents (SEA, India, MEA, US) on n8n + Twilio + ElevenLabs — booked 26 meetings with companies like JSW and Adani Group.',
+      'Automated weekly supply chain and hiring intelligence for 153 AE-owned accounts using n8n + Google Vertex AI, delivering Slack summaries to each AE\'s dedicated channel.',
+      'Contributed to GoComet\'s Book of Business — engineered Gemini prompts and ran in-house evaluations across 3,000+ enterprise accounts, replacing a ₹5 lakh vendor quote.',
+    ],
   },
   {
     id: 2,
-    name: 'Sangria by dotkonnekt',
-    pos: 'UI Intern',
-    duration: 'June-October 2024',
-    title: "Delivered 7 production-ready tasks, optimising platform functionality and boosting SEO performance. Developed and integrated over 5 APIs using React.js and Next.js, enhancing feature scalability. Designed and implemented responsive, user-friendly interfaces with Tailwind CSS and Material-UI, improving user engagement and accessibility.",
-    icon: '/assets/dotkonnekt.jpeg',
+    code: 'LOG-2025',
+    timestamp: 'FEB 2025 — APR 2025',
+    status: 'COMPLETE',
+    company: 'DRDO',
+    role: 'Research Trainee — Solid State Physics Lab',
+    location: 'DELHI',
+    icon: '/assets/DRDO.png',
     animation: 'clapping',
+    summary:
+      'Hardware-side mission: laser frequency stabilisation using the Pound-Drever-Hall technique.',
+    objectives: [
+      'Designed a laser frequency stabilisation locking system using the Pound-Drever-Hall technique.',
+      'Simulated and analysed performance in LTspice; researched drift mechanisms and stabilisation factors.',
+    ],
   },
-  // {
-  //   id: 3,
-  //   name: 'Notion',
-  //   pos: 'Junior Web Developer',
-  //   duration: '2019 - 2020',
-  //   title: "Notion helps me keep my projects organized. I use it for project management, task tracking, and as a central hub for documentation, ensuring that everything from design notes to.",
-  //   icon: '/assets/notion.svg',
-  //   animation: 'salute',
-  // },
+  {
+    id: 3,
+    code: 'LOG-2024',
+    timestamp: 'JUN 2024 — OCT 2024',
+    status: 'COMPLETE',
+    company: 'DotKonnekt',
+    role: 'UI Intern — Sangria Platform',
+    location: 'REMOTE',
+    icon: '/assets/dotkonnekt.jpeg',
+    animation: 'salute',
+    summary:
+      'Frontend mission: ship production UI on internal tools, scale features, lift SEO.',
+    objectives: [
+      'Delivered 7 production-ready tasks on internal tools — optimised platform functionality and lifted SEO.',
+      'Developed and integrated 5+ APIs with React.js and Next.js to enhance feature scalability.',
+      'Built responsive interfaces in Tailwind CSS and Material-UI, improving engagement and accessibility.',
+    ],
+  },
 ];
+
+export const education = {
+  school: 'Maharaja Agrasen Institute of Technology',
+  degree: 'B.Tech — Electrical & Electronics Engineering',
+  duration: '2022 — 2026',
+  status: '4TH YEAR / IN PROGRESS',
+};
