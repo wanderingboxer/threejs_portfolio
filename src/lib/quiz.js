@@ -24,11 +24,11 @@ export const QUIZ_QUESTIONS = [
     detail: 'Pound–Drever–Hall locking, simulated in LTspice at SSPL.',
   },
   {
-    q: 'AI-Nexus is powered by which model?',
-    options: ['GPT-4', 'Gemini Pro', 'Claude 3.5 Sonnet', 'Llama 3'],
+    q: 'Which automation platform powers his AI calling agents at GoComet?',
+    options: ['Zapier', 'Make.com', 'n8n', 'Bubble'],
     correct: 2,
     accent: 'violet',
-    detail: 'Built on LangChain + Claude 3.5 Sonnet with prompt caching and tool use.',
+    detail: 'n8n + Twilio + ElevenLabs — 4 region-specific agents, 26 real meetings booked.',
   },
   {
     q: 'How many employees played the GoComet Townhall quiz live?',
