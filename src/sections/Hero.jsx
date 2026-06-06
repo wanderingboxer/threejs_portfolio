@@ -90,6 +90,11 @@ const Hero = () => {
                 LFG · SAY HI
               </a>
             </div>
+            <div className="hero-reveal mt-3 flex items-center gap-2 font-mono text-[10px] uppercase tracking-[0.3em] text-hud-dim">
+              <span className="dot-magenta" />
+              <span className="text-neon-magenta">PLAYABLE</span>
+              <span className="text-hud-text/80">— scroll to MISSIONS and PRESS START on the Townhall quiz</span>
+            </div>
 
             {/* Stats row */}
             <div className="hero-reveal mt-12 grid grid-cols-2 sm:grid-cols-4 gap-3 max-w-3xl">

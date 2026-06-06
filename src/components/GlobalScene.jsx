@@ -93,14 +93,25 @@ const Crystal = ({ index, scrollRef, scrollVelRef }) => {
   return (
     <mesh ref={ref}>
       {makeGeometry(seed.shape)}
-      <meshStandardMaterial
+      {/*
+        MeshPhysicalMaterial with built-in single-pass transmission gives
+        us the glass refraction look without the multi-pass cost of
+        MeshTransmissionMaterial. Stays within Three's stock pipeline so
+        we don't lose WebGL context under load.
+      */}
+      <meshPhysicalMaterial
         color={color}
         emissive={color}
-        emissiveIntensity={1.2}
-        roughness={0.35}
-        metalness={0.35}
+        emissiveIntensity={0.55}
+        transmission={0.9}
+        thickness={0.6}
+        ior={1.45}
+        roughness={0.12}
+        metalness={0.05}
+        clearcoat={1}
+        clearcoatRoughness={0.05}
         transparent
-        opacity={0.85}
+        opacity={0.95}
       />
     </mesh>
   );

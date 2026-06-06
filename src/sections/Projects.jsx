@@ -8,6 +8,7 @@ import { myProjects } from '../constants/index.js';
 import CanvasLoader from '../components/Loading.jsx';
 import DemoComputer from '../components/DemoComputer.jsx';
 import SceneBoundary from '../components/SceneBoundary.jsx';
+import TownhallQuiz from '../components/TownhallQuiz.jsx';
 
 const accentTextClass = {
   cyan: 'text-neon-cyan',
@@ -35,8 +36,10 @@ const accentCardClass = {
 
 const Projects = () => {
   const [index, setIndex] = useState(0);
+  const [quizOpen, setQuizOpen] = useState(false);
   const project = myProjects[index];
   const sectionRef = useRef(null);
+  const isTownhall = project.id === 'Q01';
 
   const nav = (dir) =>
     setIndex((p) =>
@@ -125,9 +128,21 @@ const Projects = () => {
                   NEXT ›
                 </button>
               </div>
-              <a href={project.href} target="_blank" rel="noreferrer" className="btn-primary">
-                PLAY LIVE <span>↗</span>
-              </a>
+              <div className="flex items-center gap-2">
+                {isTownhall && (
+                  <button onClick={() => setQuizOpen(true)} className="btn-primary" data-magnetic>
+                    PLAY THE QUIZ → HERE
+                  </button>
+                )}
+                <a
+                  href={project.href}
+                  target="_blank"
+                  rel="noreferrer"
+                  className={isTownhall ? 'btn-secondary' : 'btn-primary'}
+                  data-magnetic>
+                  {isTownhall ? 'CODE ↗' : 'PLAY LIVE ↗'}
+                </a>
+              </div>
             </div>
 
             {/* Mission selector dots */}
@@ -194,6 +209,8 @@ const Projects = () => {
           </div>
         </div>
       </div>
+
+      <TownhallQuiz open={quizOpen} onClose={() => setQuizOpen(false)} />
     </section>
   );
 };
