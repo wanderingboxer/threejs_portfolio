@@ -7,6 +7,7 @@ import { Center, OrbitControls } from '@react-three/drei';
 import { myProjects } from '../constants/index.js';
 import CanvasLoader from '../components/Loading.jsx';
 import DemoComputer from '../components/DemoComputer.jsx';
+import SceneBoundary from '../components/SceneBoundary.jsx';
 
 const accentTextClass = {
   cyan: 'text-neon-cyan',
@@ -168,20 +169,22 @@ const Projects = () => {
             <div className="absolute inset-0 bg-grid-dense opacity-25 pointer-events-none" />
 
             <div className="absolute inset-0">
-              <Canvas dpr={[1, 1.5]}>
-                <ambientLight intensity={Math.PI} />
-                <directionalLight position={[10, 10, 5]} intensity={0.9} color="#FF2E97" />
-                <directionalLight position={[-10, 5, -5]} intensity={0.6} color="#00F0FF" />
-                <pointLight position={[0, 0, 5]} intensity={0.5} color="#B6FF3C" />
-                <Center>
-                  <Suspense fallback={<CanvasLoader />}>
-                    <group scale={2} position={[0, -3, 0]} rotation={[0, -0.1, 0]}>
-                      <DemoComputer texture={project.texture} />
-                    </group>
-                  </Suspense>
-                </Center>
-                <OrbitControls maxPolarAngle={Math.PI / 2} enableZoom={false} enablePan={false} />
-              </Canvas>
+              <SceneBoundary>
+                <Canvas dpr={[1, 1.25]} gl={{ powerPreference: 'high-performance' }}>
+                  <ambientLight intensity={Math.PI} />
+                  <directionalLight position={[10, 10, 5]} intensity={0.9} color="#FF2E97" />
+                  <directionalLight position={[-10, 5, -5]} intensity={0.6} color="#00F0FF" />
+                  <pointLight position={[0, 0, 5]} intensity={0.5} color="#B6FF3C" />
+                  <Center>
+                    <Suspense fallback={<CanvasLoader />}>
+                      <group scale={2} position={[0, -3, 0]} rotation={[0, -0.1, 0]}>
+                        <DemoComputer texture={project.texture} />
+                      </group>
+                    </Suspense>
+                  </Center>
+                  <OrbitControls maxPolarAngle={Math.PI / 2} enableZoom={false} enablePan={false} />
+                </Canvas>
+              </SceneBoundary>
             </div>
 
             <div className="absolute bottom-4 left-4 right-4 z-10 flex items-center justify-between font-mono text-[10px] uppercase tracking-[0.25em] text-hud-dim">
