@@ -7,6 +7,8 @@ import { Center, OrbitControls } from '@react-three/drei';
 import { myProjects } from '../constants/index.js';
 import CanvasLoader from '../components/Loading.jsx';
 import DemoComputer from '../components/DemoComputer.jsx';
+import SceneBoundary from '../components/SceneBoundary.jsx';
+import TownhallQuiz from '../components/TownhallQuiz.jsx';
 
 const accentTextClass = {
   cyan: 'text-neon-cyan',
@@ -34,8 +36,10 @@ const accentCardClass = {
 
 const Projects = () => {
   const [index, setIndex] = useState(0);
+  const [quizOpen, setQuizOpen] = useState(false);
   const project = myProjects[index];
   const sectionRef = useRef(null);
+  const isTownhall = project.id === 'Q01';
 
   const nav = (dir) =>
     setIndex((p) =>
@@ -124,9 +128,21 @@ const Projects = () => {
                   NEXT ›
                 </button>
               </div>
-              <a href={project.href} target="_blank" rel="noreferrer" className="btn-primary">
-                PLAY LIVE <span>↗</span>
-              </a>
+              <div className="flex items-center gap-2">
+                {isTownhall && (
+                  <button onClick={() => setQuizOpen(true)} className="btn-primary" data-magnetic>
+                    PLAY THE QUIZ → HERE
+                  </button>
+                )}
+                <a
+                  href={project.href}
+                  target="_blank"
+                  rel="noreferrer"
+                  className={isTownhall ? 'btn-secondary' : 'btn-primary'}
+                  data-magnetic>
+                  {isTownhall ? 'CODE ↗' : 'PLAY LIVE ↗'}
+                </a>
+              </div>
             </div>
 
             {/* Mission selector dots */}
@@ -168,20 +184,22 @@ const Projects = () => {
             <div className="absolute inset-0 bg-grid-dense opacity-25 pointer-events-none" />
 
             <div className="absolute inset-0">
-              <Canvas dpr={[1, 1.5]}>
-                <ambientLight intensity={Math.PI} />
-                <directionalLight position={[10, 10, 5]} intensity={0.9} color="#FF2E97" />
-                <directionalLight position={[-10, 5, -5]} intensity={0.6} color="#00F0FF" />
-                <pointLight position={[0, 0, 5]} intensity={0.5} color="#B6FF3C" />
-                <Center>
-                  <Suspense fallback={<CanvasLoader />}>
-                    <group scale={2} position={[0, -3, 0]} rotation={[0, -0.1, 0]}>
-                      <DemoComputer texture={project.texture} />
-                    </group>
-                  </Suspense>
-                </Center>
-                <OrbitControls maxPolarAngle={Math.PI / 2} enableZoom={false} enablePan={false} />
-              </Canvas>
+              <SceneBoundary>
+                <Canvas dpr={[1, 1.25]} gl={{ powerPreference: 'high-performance' }}>
+                  <ambientLight intensity={Math.PI} />
+                  <directionalLight position={[10, 10, 5]} intensity={0.9} color="#FF2E97" />
+                  <directionalLight position={[-10, 5, -5]} intensity={0.6} color="#00F0FF" />
+                  <pointLight position={[0, 0, 5]} intensity={0.5} color="#B6FF3C" />
+                  <Center>
+                    <Suspense fallback={<CanvasLoader />}>
+                      <group scale={2} position={[0, -3, 0]} rotation={[0, -0.1, 0]}>
+                        <DemoComputer texture={project.texture} />
+                      </group>
+                    </Suspense>
+                  </Center>
+                  <OrbitControls maxPolarAngle={Math.PI / 2} enableZoom={false} enablePan={false} />
+                </Canvas>
+              </SceneBoundary>
             </div>
 
             <div className="absolute bottom-4 left-4 right-4 z-10 flex items-center justify-between font-mono text-[10px] uppercase tracking-[0.25em] text-hud-dim">
@@ -191,6 +209,8 @@ const Projects = () => {
           </div>
         </div>
       </div>
+
+      <TownhallQuiz open={quizOpen} onClose={() => setQuizOpen(false)} />
     </section>
   );
 };

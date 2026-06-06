@@ -2,6 +2,8 @@ import { useRef, useMemo } from 'react';
 import { Canvas, useFrame } from '@react-three/fiber';
 import * as THREE from 'three';
 
+import SceneBoundary from './SceneBoundary.jsx';
+
 const latLngToVec3 = (lat, lng, r) => {
   const phi = (90 - lat) * (Math.PI / 180);
   const theta = (lng + 180) * (Math.PI / 180);
@@ -135,14 +137,16 @@ const Stars = () => {
 const HoloGlobe = () => {
   return (
     <div className="w-full h-full">
-      <Canvas
-        dpr={[1, 2]}
-        camera={{ position: [0, 0, 3.2], fov: 38 }}
-        gl={{ antialias: true, alpha: true }}>
-        <ambientLight intensity={0.5} />
-        <Stars />
-        <Wireframe />
-      </Canvas>
+      <SceneBoundary>
+        <Canvas
+          dpr={[1, 1.25]}
+          camera={{ position: [0, 0, 3.2], fov: 38 }}
+          gl={{ antialias: true, alpha: true, powerPreference: 'high-performance' }}>
+          <ambientLight intensity={0.5} />
+          <Stars />
+          <Wireframe />
+        </Canvas>
+      </SceneBoundary>
     </div>
   );
 };
