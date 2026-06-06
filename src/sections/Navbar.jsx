@@ -1,7 +1,8 @@
 import { useEffect, useState } from 'react';
 
 import { navLinks, profile } from '../constants/index.js';
-import SystemClock from '../components/SystemClock.jsx';
+import LiveTime from '../components/LiveTime.jsx';
+import MuteToggle from '../components/MuteToggle.jsx';
 
 const NavItems = ({ onClick, activeId }) => (
   <ul className="flex flex-col sm:flex-row gap-1 sm:gap-1.5">
@@ -78,7 +79,7 @@ const Navbar = () => {
           <span className="flex items-center gap-2 text-neon-lime">
             <span className="dot-lime" /> ONLINE
           </span>
-          <SystemClock />
+          <LiveTime />
         </div>
       </div>
 
@@ -112,8 +113,9 @@ const Navbar = () => {
             {open ? '×' : '≡'}
           </button>
 
-          <nav className="hidden sm:block">
+          <nav className="hidden sm:flex items-center gap-3">
             <NavItems activeId={active} />
+            <MuteToggle />
           </nav>
         </div>
 
