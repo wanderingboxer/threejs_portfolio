@@ -8,17 +8,17 @@ const Footer = () => {
       <div className="relative container-x c-space py-10 sm:py-12">
         <div className="grid grid-cols-12 gap-6 items-center">
           <div className="col-span-12 sm:col-span-5">
-            <div className="font-display text-3xl sm:text-4xl text-hud-text">
-              <span className="text-gradient-cyber">EOF</span>
+            <div className="font-display text-4xl sm:text-5xl">
+              <span className="text-rainbow">GAME OVER</span>
               <span className="text-neon-magenta">.</span>
             </div>
-            <p className="mt-2 font-mono text-[11px] uppercase tracking-[0.25em] text-hud-dim">
-              END OF TRANSMISSION · STAND BY FOR RESPONSE
+            <p className="mt-3 font-mono text-[11px] uppercase tracking-[0.25em] text-hud-dim">
+              THANKS FOR PLAYING · DM IF YOU WANT TO START A NEW GAME
             </p>
           </div>
 
           <div className="col-span-12 sm:col-span-4">
-            <div className="font-mono text-[10px] uppercase tracking-[0.25em] text-hud-dim mb-2">
+            <div className="font-display text-[10px] uppercase tracking-[0.3em] text-holo mb-3">
               CHANNELS
             </div>
             <div className="flex flex-wrap gap-2">
@@ -29,10 +29,10 @@ const Footer = () => {
           </div>
 
           <div className="col-span-12 sm:col-span-3 text-left sm:text-right">
-            <div className="font-mono text-[10px] uppercase tracking-[0.25em] text-hud-dim">
+            <div className="font-display text-[10px] uppercase tracking-[0.3em] text-hud-dim">
               BUILD
             </div>
-            <div className="font-mono text-xs text-hud-text mt-1">v2.0.0 · CYBER</div>
+            <div className="font-mono text-xs text-hud-text mt-1">v2.0 · ARCADE</div>
             <div className="font-mono text-[10px] text-hud-dim mt-2">
               © {year} ADITYA SAXENA
             </div>
@@ -43,12 +43,12 @@ const Footer = () => {
 
         <div className="flex flex-wrap items-center justify-between gap-4 font-mono text-[10px] uppercase tracking-[0.25em] text-hud-dim">
           <div className="flex items-center gap-3">
-            <span className="blink-dot" /> SYSTEM ONLINE
+            <span className="dot-lime" /> SYSTEM ONLINE
             <span>·</span>
             <span>BLR · 12.97°N 77.59°E</span>
           </div>
           <div className="flex items-center gap-3">
-            <span>BUILT WITH REACT · R3F · GSAP · TAILWIND</span>
+            <span>CRAFTED WITH REACT · R3F · GSAP · TAILWIND</span>
           </div>
         </div>
       </div>
@@ -61,7 +61,7 @@ const SocialLink = ({ href, label }) => (
     href={href}
     target="_blank"
     rel="noreferrer"
-    className="chip hover:border-neon-cyan/60 hover:text-neon-cyan transition-colors">
+    className="chip-soft hover:border-neon-magenta/60 hover:text-neon-magenta transition-colors">
     {label} ↗
   </a>
 );

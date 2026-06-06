@@ -1,13 +1,12 @@
 import { useEffect, useState } from 'react';
 
-const BOOT_LINES = [
-  '> INIT PILOT.OS v2.0',
-  '> LOADING NEURAL.CORE ............... [OK]',
-  '> MOUNTING TELEMETRY/HUD ............ [OK]',
-  '> SYNCING MISSION LOG ............... [OK]',
-  '> ESTABLISHING COMMS LINK ........... [OK]',
-  '> AUTH: ADITYA.SAXENA',
-  '> SYSTEM READY — WELCOME, OPERATOR.',
+const LINES = [
+  { t: '> Spinning up the arcade...', c: 'text-neon-cyan' },
+  { t: '> Loading inventory & power-ups', c: 'text-neon-violet' },
+  { t: '> Mounting quest log', c: 'text-neon-lime' },
+  { t: '> Sync XP · trophies · stats', c: 'text-neon-amber' },
+  { t: '> Pilot recognised: ADITYA.SAXENA', c: 'text-neon-magenta' },
+  { t: '> Ready Player 1 ✦', c: 'text-neon-gold' },
 ];
 
 const BootScreen = ({ onComplete }) => {
@@ -18,35 +17,32 @@ const BootScreen = ({ onComplete }) => {
 
   useEffect(() => {
     let i = 0;
-    const lineTimer = setInterval(() => {
-      if (i >= BOOT_LINES.length) {
-        clearInterval(lineTimer);
+    const lineT = setInterval(() => {
+      if (i >= LINES.length) {
+        clearInterval(lineT);
         setDone(true);
         return;
       }
-      setPrinted((p) => [...p, BOOT_LINES[i]]);
+      setPrinted((p) => [...p, LINES[i]]);
       i += 1;
     }, 220);
 
-    const progTimer = setInterval(() => {
-      setProgress((p) => {
-        const next = p + Math.random() * 9 + 4;
-        return next >= 100 ? 100 : next;
-      });
+    const progT = setInterval(() => {
+      setProgress((p) => Math.min(100, p + Math.random() * 9 + 4));
     }, 140);
 
     return () => {
-      clearInterval(lineTimer);
-      clearInterval(progTimer);
+      clearInterval(lineT);
+      clearInterval(progT);
     };
   }, []);
 
   useEffect(() => {
     if (done && progress >= 100) {
-      const t = setTimeout(() => setHide(true), 500);
+      const t1 = setTimeout(() => setHide(true), 500);
       const t2 = setTimeout(() => onComplete && onComplete(), 1200);
       return () => {
-        clearTimeout(t);
+        clearTimeout(t1);
         clearTimeout(t2);
       };
     }
@@ -57,59 +53,48 @@ const BootScreen = ({ onComplete }) => {
       className="boot-screen transition-opacity duration-700"
       style={{ opacity: hide ? 0 : 1, pointerEvents: hide ? 'none' : 'auto' }}>
       <div className="absolute inset-0 bg-grid-dense opacity-30" />
-      <div className="absolute inset-0 bg-radial-fade" />
+      <div className="aurora" />
 
       <div className="relative w-[min(560px,92vw)] z-10">
-        <div className="flex items-center justify-between mb-6">
+        <div className="flex items-center justify-between mb-5">
           <div className="flex items-center gap-2">
-            <span className="blink-dot-cyan" />
-            <span className="hud-eyebrow text-neon-cyan/80">SYSTEM BOOT</span>
+            <span className="dot-cyan" />
+            <span className="font-mono uppercase tracking-[0.35em] text-[10px] text-hud-text/90">
+              GAME LOADING
+            </span>
           </div>
-          <span className="hud-eyebrow">v2.0.0</span>
+          <span className="font-mono uppercase tracking-[0.35em] text-[10px] text-hud-dim">
+            v2.0 · ARCADE
+          </span>
         </div>
 
-        <div className="hud-panel frame-cut p-5 sm:p-7 font-mono text-[12px] sm:text-sm leading-relaxed">
-          <span className="hud-corner hud-corner-tl" />
-          <span className="hud-corner hud-corner-tr" />
-          <span className="hud-corner hud-corner-bl" />
-          <span className="hud-corner hud-corner-br" />
-
+        <div className="relative card-base card-holo rounded-3xl p-6 sm:p-8 font-mono text-[13px] leading-relaxed overflow-hidden">
           <div className="text-hud-text/90 whitespace-pre-line min-h-[180px]">
             {printed.map((l, idx) => (
-              <div
-                key={idx}
-                className={
-                  l.includes('[OK]')
-                    ? 'text-hud-text'
-                    : l.startsWith('> AUTH')
-                      ? 'text-neon-magenta'
-                      : l.startsWith('> SYSTEM READY')
-                        ? 'text-neon-lime'
-                        : 'text-neon-cyan'
-                }>
-                {l}
+              <div key={idx} className={l.c}>
+                {l.t}
               </div>
             ))}
             <div className="typing-caret text-neon-cyan h-4" />
           </div>
 
           <div className="mt-6">
-            <div className="flex items-center justify-between text-[10px] text-hud-dim mb-2">
-              <span>LOAD</span>
-              <span>{Math.floor(progress)}%</span>
+            <div className="flex items-center justify-between text-[10px] text-hud-dim mb-2 font-mono uppercase tracking-[0.25em]">
+              <span>Loading</span>
+              <span className="text-holo">{Math.floor(progress)}%</span>
             </div>
-            <div className="skill-bar-track">
+            <div className="xp-track h-2.5">
               <div
-                className="skill-bar-fill transition-[width] duration-200"
+                className="xp-fill transition-[width] duration-200"
                 style={{ width: `${progress}%` }}
               />
             </div>
           </div>
         </div>
 
-        <div className="mt-4 flex items-center justify-between hud-eyebrow text-hud-dim">
+        <div className="mt-5 flex items-center justify-between font-mono uppercase tracking-[0.35em] text-[10px] text-hud-dim">
           <span>BLR · 12.97°N 77.59°E</span>
-          <span className="text-neon-cyan/70">PILOT-04052</span>
+          <span className="text-holo">PRESS START</span>
         </div>
       </div>
     </div>
