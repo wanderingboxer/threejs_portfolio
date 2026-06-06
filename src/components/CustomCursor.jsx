@@ -2,6 +2,8 @@ import { useEffect, useRef } from 'react';
 
 import { clickSound, tickSound } from '../lib/sound.js';
 
+const HOVER_SEL = 'a, button, [data-cursor="hover"], [data-magnetic], input, textarea, label';
+
 const CustomCursor = () => {
   const dotRef = useRef(null);
   const ringRef = useRef(null);
@@ -19,18 +21,21 @@ const CustomCursor = () => {
     let mouseY = window.innerHeight / 2;
     let ringX = mouseX;
     let ringY = mouseY;
-    let dotX = mouseX;
-    let dotY = mouseY;
     let magnetic = null;
+    let lastTick = 0;
     let rafId;
 
+    // Dot moves INSTANTLY with the mouse — no lerp.
     const onMove = (e) => {
       mouseX = e.clientX;
       mouseY = e.clientY;
+      if (dot) {
+        dot.style.transform = `translate3d(${mouseX}px, ${mouseY}px, 0) translate(-50%, -50%)`;
+      }
     };
 
+    // Only the ring lerps — and magnetic pull only applies to the ring.
     const animate = () => {
-      // Magnetic pull on hovered target
       let tx = mouseX;
       let ty = mouseY;
       if (magnetic) {
@@ -40,27 +45,36 @@ const CustomCursor = () => {
         tx = mouseX + (cx - mouseX) * 0.35;
         ty = mouseY + (cy - mouseY) * 0.35;
       }
-      dotX += (tx - dotX) * 0.55;
-      dotY += (ty - dotY) * 0.55;
-      ringX += (tx - ringX) * 0.18;
-      ringY += (ty - ringY) * 0.18;
-      if (dot) dot.style.transform = `translate3d(${dotX}px, ${dotY}px, 0) translate(-50%, -50%)`;
-      if (ring) ring.style.transform = `translate3d(${ringX}px, ${ringY}px, 0) translate(-50%, -50%)`;
+      ringX += (tx - ringX) * 0.22;
+      ringY += (ty - ringY) * 0.22;
+      if (ring) {
+        ring.style.transform = `translate3d(${ringX}px, ${ringY}px, 0) translate(-50%, -50%)`;
+      }
       rafId = requestAnimationFrame(animate);
     };
 
-    const onEnter = (e) => {
-      if (!ring) return;
-      ring.classList.add('hovering');
-      const el = e.currentTarget;
-      if (el.dataset?.magnetic !== undefined || el.tagName === 'BUTTON' || el.tagName === 'A') {
-        magnetic = el;
+    // Event delegation — one listener on document, no DOM scanning, no observer.
+    const onOver = (e) => {
+      const el = e.target.closest(HOVER_SEL);
+      if (!el || el === magnetic) return;
+      magnetic = el;
+      ring && ring.classList.add('hovering');
+      const now = performance.now();
+      if (now - lastTick > 120) {
+        lastTick = now;
+        tickSound();
       }
-      tickSound();
     };
-    const onLeave = () => {
-      ring && ring.classList.remove('hovering');
-      magnetic = null;
+
+    const onOut = (e) => {
+      const to = e.relatedTarget;
+      if (magnetic && (!to || !magnetic.contains(to))) {
+        const stillIn = to && to.closest && to.closest(HOVER_SEL);
+        if (!stillIn) {
+          magnetic = null;
+          ring && ring.classList.remove('hovering');
+        }
+      }
     };
 
     const onClick = (e) => {
@@ -71,17 +85,14 @@ const CustomCursor = () => {
       burst.style.left = `${e.clientX}px`;
       burst.style.top = `${e.clientY}px`;
 
-      // 12 sparks in random colors
       const palette = ['#00F0FF', '#FF2E97', '#B6FF3C', '#FFD24A', '#9B5DE5'];
       for (let i = 0; i < 12; i += 1) {
         const spark = document.createElement('span');
         spark.className = 'cursor-spark';
         const angle = (i / 12) * Math.PI * 2 + Math.random() * 0.4;
         const dist = 28 + Math.random() * 22;
-        const dx = Math.cos(angle) * dist;
-        const dy = Math.sin(angle) * dist;
-        spark.style.setProperty('--dx', `${dx}px`);
-        spark.style.setProperty('--dy', `${dy}px`);
+        spark.style.setProperty('--dx', `${Math.cos(angle) * dist}px`);
+        spark.style.setProperty('--dy', `${Math.sin(angle) * dist}px`);
         spark.style.background = palette[i % palette.length];
         burst.appendChild(spark);
       }
@@ -89,29 +100,18 @@ const CustomCursor = () => {
       setTimeout(() => burst.remove(), 700);
     };
 
-    window.addEventListener('mousemove', onMove);
+    window.addEventListener('mousemove', onMove, { passive: true });
+    document.addEventListener('mouseover', onOver, { passive: true });
+    document.addEventListener('mouseout', onOut, { passive: true });
     window.addEventListener('click', onClick);
-
-    const SEL = 'a, button, [data-cursor="hover"], [data-magnetic], input, textarea, label';
-    const bind = (el) => {
-      if (el.dataset.cursorBound) return;
-      el.dataset.cursorBound = '1';
-      el.addEventListener('mouseenter', onEnter);
-      el.addEventListener('mouseleave', onLeave);
-    };
-    document.querySelectorAll(SEL).forEach(bind);
-
-    const observer = new MutationObserver(() => {
-      document.querySelectorAll(SEL).forEach(bind);
-    });
-    observer.observe(document.body, { childList: true, subtree: true });
 
     animate();
     return () => {
       cancelAnimationFrame(rafId);
       window.removeEventListener('mousemove', onMove);
+      document.removeEventListener('mouseover', onOver);
+      document.removeEventListener('mouseout', onOut);
       window.removeEventListener('click', onClick);
-      observer.disconnect();
     };
   }, []);
 

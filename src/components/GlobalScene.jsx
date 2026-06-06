@@ -8,7 +8,7 @@ import * as THREE from 'three';
 
 const NEON = ['#00F0FF', '#FF2E97', '#9B5DE5', '#B6FF3C', '#FFD24A', '#7C5BFF'];
 
-const CRYSTAL_COUNT = 9;
+const CRYSTAL_COUNT = 6;
 
 const Crystal = ({ index, scrollRef, scrollVelRef }) => {
   const ref = useRef();
@@ -122,17 +122,17 @@ const Crystal = ({ index, scrollRef, scrollVelRef }) => {
         <Geometry />
         <MeshTransmissionMaterial
           color={color}
-          thickness={0.55}
-          roughness={0.05}
+          thickness={0.5}
+          roughness={0.08}
           transmission={1}
-          ior={1.45}
-          chromaticAberration={0.55}
-          backside
-          samples={4}
-          resolution={256}
-          distortion={0.3}
-          distortionScale={0.4}
-          temporalDistortion={0.1}
+          ior={1.4}
+          chromaticAberration={0.35}
+          backside={false}
+          samples={2}
+          resolution={128}
+          distortion={0.2}
+          distortionScale={0.3}
+          temporalDistortion={0.05}
           attenuationDistance={1.2}
           attenuationColor={color}
         />
@@ -216,7 +216,7 @@ const SceneRig = ({ scrollRef, scrollVelRef }) => {
       <pointLight position={[0, 0, 4]} intensity={0.8} color="#9B5DE5" />
       <pointLight position={[0, -4, -2]} intensity={0.6} color="#FFD24A" />
 
-      <ParticleField count={420} scrollRef={scrollRef} />
+      <ParticleField count={220} scrollRef={scrollRef} />
 
       {Array.from({ length: CRYSTAL_COUNT }).map((_, i) => (
         <Crystal key={i} index={i} scrollRef={scrollRef} scrollVelRef={scrollVelRef} />
@@ -249,9 +249,10 @@ const GlobalScene = () => {
   return (
     <div className="global-scene" aria-hidden>
       <Canvas
-        dpr={[1, 1.5]}
+        dpr={[1, 1.25]}
         camera={{ position: [0, 0, 9], fov: 50 }}
-        gl={{ alpha: true, antialias: true }}>
+        gl={{ alpha: true, antialias: true, powerPreference: 'high-performance' }}
+        frameloop="always">
         <SceneRig scrollRef={scrollRef} scrollVelRef={scrollVelRef} />
       </Canvas>
     </div>
