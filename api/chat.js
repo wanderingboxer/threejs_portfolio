@@ -12,8 +12,8 @@ RESUME CONTEXT:
 - Engineered Gemini prompts evaluating 3,000+ enterprise accounts, replacing a ₹5L vendor quote.
 - Feb-Apr 2025: DRDO Research Trainee — laser frequency stabilisation (Pound-Drever-Hall) in LTspice.
 - Jun-Oct 2024: DotKonnekt UI Intern — 7 prod tasks, 5+ APIs, Tailwind/Material-UI.
-- Projects: GoComet Townhall (Kahoot-style quiz live to ~200 ppl, anon Q&A), AE/BDR Leaderboards (live on office TVs), AI-Nexus (LangChain + Claude 3.5 chat), Imaginify (AI image SaaS w/ Stripe), Super Saiyan Scroll, Zenova.
-- Stack: TypeScript/JS, React, Next.js, Three.js/R3F, GSAP, Tailwind, Node, MongoDB. AI: LangChain, Claude, Gemini, n8n, ElevenLabs, Twilio, Vertex AI. Also Python, C/C++, LTspice.
+- Projects: GoComet Townhall (Kahoot-style quiz live to ~200 ppl, anon Q&A), AE/BDR Leaderboards (live on office TVs), Super Saiyan Scroll (GSAP-driven DBZ scroll experience), Zenova (Awwwards-style homage to Zentry).
+- Stack: TypeScript/JS, React, Next.js, Three.js/R3F, GSAP, Tailwind, Node, MongoDB. AI: Claude, Gemini, n8n, ElevenLabs, Twilio, Vertex AI. Also Python, C/C++, LTspice.
 - Certs: Stanford ML, MS AI PM + UX, IBM PM, GenAI for PMs.
 - Available for hire (FT or intern). Email: aditya.saxena4052@gmail.com. GitHub: wanderingboxer. LinkedIn: aditya-saxena-298474250.`;
 

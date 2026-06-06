@@ -30,16 +30,6 @@ export const knowledge = [
     text: `AE & BDR Leaderboards — two realtime sales dashboards that run on the office TVs across GoComet's sales floor. The BDR board tracks weekly meetings; the AE board tracks monthly pipeline. They turned quotas into a live scoreboard the team plays against every day.`,
   },
   {
-    id: 'ai-nexus',
-    keywords: ['ai-nexus', 'nexus', 'langchain', 'claude', 'chat', 'chatbot'],
-    text: `AI-Nexus is a Next.js AI chat app I built with LangChain + Claude 3.5 Sonnet. Real-time conversations, prompt caching, intelligent tool orchestration. Production-grade — feels like a workspace, not a toy demo.`,
-  },
-  {
-    id: 'imaginify',
-    keywords: ['imaginify', 'image', 'saas', 'stripe', 'payments', 'cloudinary'],
-    text: `Imaginify is a SaaS for AI image manipulation — restoration, recolor, object removal, generative fill, background removal. Full-stack: Next.js + TypeScript + Cloudinary AI + Stripe payments + a credits model + auth.`,
-  },
-  {
     id: 'saiyan',
     keywords: ['saiyan', 'dragon', 'ball', 'scroll', 'gsap', 'super', 'dbz'],
     text: `Super Saiyan Scroll — an immersive scroll experience inspired by Dragon Ball Super. Built with React + GSAP + Tailwind. Dynamic transitions, kinetic motion. Showcase of scroll storytelling craft.`,
@@ -66,8 +56,8 @@ export const knowledge = [
   },
   {
     id: 'ai-experience',
-    keywords: ['ai', 'agent', 'agents', 'llm', 'gemini', 'prompt', 'prompts', 'automation', 'n8n'],
-    text: `Most of my recent work is AI-heavy: I build agents on n8n + Twilio + ElevenLabs for outbound calling (4 deployed across regions), engineer Gemini prompts that run evaluations across 3,000+ enterprise accounts, and built a LangChain + Claude 3.5 chat app. I treat AI as a tool to ship product, not a demo.`,
+    keywords: ['ai', 'agent', 'agents', 'llm', 'gemini', 'claude', 'langchain', 'prompt', 'prompts', 'automation', 'n8n'],
+    text: `Most of my recent work is AI-heavy: I build agents on n8n + Twilio + ElevenLabs for outbound calling (4 deployed across regions: SEA, India, MEA, US — 26 meetings booked with JSW, Adani Group and others), and engineer Gemini prompts that run evaluations across 3,000+ enterprise accounts. I treat AI as a tool to ship product, not a demo.`,
   },
   {
     id: 'education',
@@ -153,4 +143,4 @@ export const localAnswer = (query) => {
   return top.entry.text + followup;
 };
 
-export const fallback = `I'm a curated assistant built from Aditya's resume — that one's just outside my map. Try asking about his GoComet work, the Townhall quiz, AI-Nexus, his stack, or whether he's hiring. Or just email him directly: aditya.saxena4052@gmail.com.`;
+export const fallback = `I'm a curated assistant built from Aditya's resume — that one's just outside my map. Try asking about his GoComet work, the Townhall quiz, the sales leaderboards, his stack, or whether he's hiring. Or just email him directly: aditya.saxena4052@gmail.com.`;
